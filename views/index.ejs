@@ -17,14 +17,15 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 <ul class="todo-list">
 <% tasks.forEach(function(task) { %>
     <li class="todo-list-item"><%= task.value.task %><%= task.value.complete %>
-    
-  
-<a href="" class="edit">
-<span class="fas fa-edit"></span>
-</a>
-<a href="" class="remove">
-<span class="fas fa-times"></span>
-</a>
+        <form action="/delete/<%= task.key %>" method="POST" class="todo-header">
+            <input type="hidden" value="<%= task.value.rev %>" name="rev">
+            <button type="submit" value="x"><span class="far fa-edit"></span></button>
+            </form>
+            <form action="/update/<%= task.key %>" method="POST" class="todo-header">
+                <input type="hidden" value="<%= task.value.rev %>" name="rev">
+                <input type="hidden" value="<%= task.value.task %>" name="task">
+                <button type="submit"><span class="fas fa-plus"></span></button>
+            </form>   
 </li> <% }); %>  
 </ul>
 </div>

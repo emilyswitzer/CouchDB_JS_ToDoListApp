@@ -51,7 +51,65 @@ app.get('/', function(req, res){
 
  app.post('/',(req, res) => {
     console.log(req.body);
-    }); 
+    const content = req.body.content;
+    
+    couch.uniqid().then(function(ids){
+        const id = ids[0];
+
+   
+         couch.insert('todolist', {
+            _id: id,
+            task: content,
+            complete: false
+        }).then(
+            function(data, headers, status){
+             res.redirect('/');
+            },
+            function(err){
+                res.send(err);
+            }
+        ) 
+    })
+
+}); 
+
+app.post('/delete/:id', function(req, res){
+     const id = req.params.id;
+     const rev = req.body.rev;
+
+     couch.del('todolist', id, rev).then(
+         function(data, headers, status){
+             res.redirect('/');
+
+     },
+     function(err){
+         res.send(err);
+     }
+     )
+});
+
+app.post('/update/:id', function(req, res){
+    const id = req.params.id;
+    const rev = req.body.rev;
+    const task = req.body.task;
+    const complete2 = "true";
+
+    couch.update('todolist', {
+        _id: id,
+        _rev: rev,
+        task: task,
+        complete: "true"
+    }).then(
+        function(data, headers, status){
+         res.redirect('/');
+        },
+        function(err){
+            res.send(err);
+        }
+    ) 
+
+   
+});
 
 app.listen(3000, function (){
     console.log('Server Started on Port 3000');
