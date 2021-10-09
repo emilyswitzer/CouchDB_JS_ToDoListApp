@@ -3,7 +3,6 @@ const path = require('path');
 const NodeCouchDb = require('node-couchdb');
 const nano = require('nano')('http://localhost:5984');
 
-
 const couch = new NodeCouchDb({
     auth: {
         user:'emily',
@@ -12,6 +11,8 @@ const couch = new NodeCouchDb({
 });
 
 const todolist = nano.db.use('todolist');
+
+
 
 
 const dbName = 'todolist';
@@ -110,6 +111,11 @@ app.post('/update/:id', function(req, res){
 
    
 });
+app.get("/", (req, res) => {
+    res.render("index", {
+      x: clicker
+    });
+  });
 
 app.listen(3000, function (){
     console.log('Server Started on Port 3000');

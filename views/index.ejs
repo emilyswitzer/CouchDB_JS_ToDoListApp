@@ -5,7 +5,9 @@
 <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
 integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
+
 </head>
+
 <body>
 <div class="todo-container">
 <h2>To-Do List</h2>
@@ -16,18 +18,32 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 </form>
 <ul class="todo-list">
 <% tasks.forEach(function(task) { %>
-    <li class="todo-list-item"><%= task.value.task %><%= task.value.complete %>
+  
+    <li class="todo-list-item" <% if(task.value.complete=='true') 
+        { %> style="text-decoration: line-through;"
+        <% } %> ><%= task.value.task %>
+        <form action="/update/<%= task.key %>" method="POST" class="todo-header">
+            <input type="hidden" value="<%= task.value.rev %>" name="rev">
+            <input type="hidden" value="<%= task.value.task %>" name="task">
+            <button type="submit" id="myButton"><span class="far fa-check-square"></span></button>
+          
+        </form> 
         <form action="/delete/<%= task.key %>" method="POST" class="todo-header">
             <input type="hidden" value="<%= task.value.rev %>" name="rev">
-            <button type="submit" value="x"><span class="far fa-edit"></span></button>
+            <button type="submit" value="x"><span class="far fa-window-close"></span></button>
             </form>
-            <form action="/update/<%= task.key %>" method="POST" class="todo-header">
-                <input type="hidden" value="<%= task.value.rev %>" name="rev">
-                <input type="hidden" value="<%= task.value.task %>" name="task">
-                <button type="submit"><span class="fas fa-plus"></span></button>
-            </form>   
+            
+
+           
+    
+
+
+               
 </li> <% }); %>  
 </ul>
 </div>
 </div>
+
+
 </body>
+
