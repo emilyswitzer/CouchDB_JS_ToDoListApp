@@ -10,7 +10,7 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 
 <body>
 <div class="todo-container">
-<h2>To-Do List</h2>
+<h2>To-Do App</h2>
 <div class="todo">
 <form action="/" method="POST" class="todo-header">
 <input type="text" name="content">
@@ -30,7 +30,7 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
         </form> 
         <form action="/delete/<%= task.key %>" method="POST" class="todo-header">
             <input type="hidden" value="<%= task.value.rev %>" name="rev">
-            <button type="submit" value="x"><span class="far fa-window-close"></span></button>
+            <button type="submit" ><span class="far fa-window-close"></span></button>
             </form>
             
 
