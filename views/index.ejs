@@ -5,9 +5,15 @@
 <link href="https://fonts.googleapis.com/css?family=Baloo+Bhai|Candal|Chewy&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css"
 integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7Ay" crossorigin="anonymous">
-
+<script src="http://code.jquery.com/jquery-3.1.0.min.js"></script>
+<script href="/static/script.js"></script> 
+<script>
+    function swapContent(page) {
+        
+        jQuery( "#myDiv" ).load(page);
+    }
+</script>
 </head>
-
 <body>
 <div class="todo-container">
 <h2>To-Do App</h2>
@@ -16,12 +22,19 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 <input type="text" name="content">
 <button type="submit"><span class="fas fa-plus"></span></button>
 </form>
+<label><input id="form-check-input" type="checkbox" onClick="swapContent('/index');" checked>&nbsp;Check me</label>
+
+<div id="myDiv"></div>
+
+
 <ul class="todo-list">
-<% tasks.forEach(function(task) { %>
-  
-    <li class="todo-list-item" <% if(task.value.complete=='true') 
+<p>Remaining Tasks : <%= total %></p>
+
+
+        <% tasks.forEach(function(task) { %>
+           <li class="todo-list-item" <% if(task.value.complete=='true') 
         { %> style="text-decoration: line-through;"
-        <% } %> ><%= task.value.task %>
+        <% } %>> <%= task.value.task %>
         <form action="/update/<%= task.key %>" method="POST" class="todo-header">
             <input type="hidden" value="<%= task.value.rev %>" name="rev">
             <input type="hidden" value="<%= task.value.task %>" name="task">
@@ -32,6 +45,7 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
             <input type="hidden" value="<%= task.value.rev %>" name="rev">
             <button type="submit" ><span class="far fa-window-close"></span></button>
             </form>
+           
             
 
            
@@ -39,7 +53,9 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 
 
                
-</li> <% }); %>  
+</li> <% }); %>   
+
+
 </ul>
 </div>
 </div>
