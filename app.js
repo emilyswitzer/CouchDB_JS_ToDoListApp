@@ -1,6 +1,5 @@
 const express = require('express');
 const path = require('path');
-const NodeCouchDb = require('node-couchdb');
 const nano = require('nano')('http://emily:emily12345@localhost:5984');
 
 // const couch = new NodeCouchDb({
@@ -40,7 +39,7 @@ const completeTasks =
             total = data.rows[0].value;
             console.log(total);
         }else{
-            res.render(err);
+           // res.render(err);
         }
 
     });
@@ -123,8 +122,9 @@ app.post('/',(req, res) => {
             task: content,
             complete: false
         }).then(
+            
             function(data, headers, status){
-              
+          
              res.redirect('/');
 
             },
