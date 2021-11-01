@@ -2,24 +2,8 @@ const express = require('express');
 const path = require('path');
 const nano = require('nano')('http://emily:emily12345@localhost:5984');
 
-// const couch = new NodeCouchDb({
-//     auth: {
-//         user:'emily',
-//         password:'emily12345'
-//     }
-// });
 
 const todolist = nano.db.use('todolist');
-
-
-
-
-// const dbName = 'todolist';
-const viewUrl = '/_design/all_tasks/_view/all';
-
-// couch.listDatabases().then(function(dbs){
-//    console.log(dbs);
-// });
 const app = express();
 
 app.set('view engine', 'ejs');
@@ -30,41 +14,33 @@ app.use("/static", express.static("public"));
 app.use(express.urlencoded({extended: true})); 
 app.use(express.json());
 
-let total=0;
-const completeTasks = 
-    todolist.view("complete_tasks", "all",
-    function(err, data){
-        if(!err){
-            console.log(data);
-            total = data.rows[0].value;
-            console.log(total);
-            
-        }else{
-           console.log(err);
+
+
+    const getCompleteTasks = async () => {
+        try {
+          const completeTasks = await todolist.view(
+            "complete_tasks",
+            "all"
+          );
+          const productType = completeTasks.rows[0].value;
+          return productType;
+        } catch (err) {
+          console.log(err);
         }
-
-    });
-
-
-app.get('/', function(req, res){
-    todolist.view("all_tasks", "all",
-    function(err, data){
-        if(!err){
-            const complete = completeTasks;
-            const tasks=data.rows;
-            res.render('index', {
-                tasks,
-                complete,
-                total
-            });
-        }else{
-            res.render(err);
-        }
-     
-    });
-});
+      };   
 
 
+
+app.get("/", async function (req, res) {
+    try {
+      const body = await todolist.view("all_tasks", "all");
+      const complete = await getCompleteTasks();
+      const tasks = body.rows;
+      res.render("index", { tasks, complete });
+    } catch (err) {
+      console.log(err);
+    }
+  });
 
 app.post('/',(req, res) => {
     console.log(req.body);
