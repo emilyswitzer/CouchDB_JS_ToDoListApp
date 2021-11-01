@@ -107,11 +107,7 @@ app.post('/update/:id', function(req, res){
 
    
 });
-app.get("/", (req, res) => {
-    res.render("index", {
-      x: click
-    });
-  });
+
 
 app.listen(3000, function (){
     console.log('Server Started on Port 3000');
