@@ -4,7 +4,7 @@
     box-sizing: border-box;
     }
     body {
-    background: #e27442;
+    background: #f08080;
     }
     .formatForButton {
         background-color:pink;
@@ -46,7 +46,7 @@
     cursor: pointer;
     padding: 5px;
     font-family: 'Candal', sans-serif;
-    background-color: rgb(51, 212, 100);
+    background-color: #2ec4b6;
     }
     
    
@@ -78,7 +78,7 @@
     cursor: pointer;
     padding: 5px;
     font-family: 'Candal', sans-serif;
-    background-color: rgb(51, 212, 100);
+    background-color: #2ec4b6;
     }
     .todo-list-item .cancel {
     color: white;
