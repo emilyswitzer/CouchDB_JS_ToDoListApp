@@ -38,8 +38,9 @@ const completeTasks =
             console.log(data);
             total = data.rows[0].value;
             console.log(total);
+            
         }else{
-           // res.render(err);
+           console.log(err);
         }
 
     });
@@ -59,56 +60,11 @@ app.get('/', function(req, res){
         }else{
             res.render(err);
         }
-
+     
     });
 });
 
 
-
-
-
-// app.get('/', function(req, res){
-//    couch.get(dbName, viewUrl).then(
-//         function(data, headers, status){
-//            console.log(data.data.rows);
-//             res.render('index',{
-//                 tasks:data.data.rows
-//             });
-
-//         },
-//         function(err){
-//             res.send(err);
-//         }
-
-//     );
-
-//    });
-
-   
-
-//  app.post('/',(req, res) => {
-//     console.log(req.body);
-//     const content = req.body.content;
-    
-//     couch.uniqid().then(function(ids){
-//         const id = ids[0];
-
-   
-//          couch.insert('todolist', {
-//             _id: id,
-//             task: content,
-//             complete: false
-//         }).then(
-//             function(data, headers, status){
-//              res.redirect('/');
-//             },
-//             function(err){
-//                 res.send(err);
-//             }
-//         ) 
-//     })
-
-// }); 
 
 app.post('/',(req, res) => {
     console.log(req.body);
@@ -136,20 +92,6 @@ app.post('/',(req, res) => {
 
 });
 
-// app.post('/delete/:id', function(req, res){
-//      const id = req.params.id;
-//      const rev = req.body.rev;
-
-//      couch.del('todolist', id, rev).then(
-//          function(data, headers, status){
-//              res.redirect('/');
-
-//      },
-//      function(err){
-//          res.send(err);
-//      }
-//      )
-// });
 
 app.post('/delete/:id', function(req, res){
     const id = req.params.id;
@@ -166,14 +108,6 @@ app.post('/delete/:id', function(req, res){
     )
 });
 
-app.post('/results', function(req, res){
-
-   if (req.body.celcius) {
-        console.log("true");
- } else {
-        console.log("false");
- }
-});
 
 app.post('/update/:id', function(req, res){
     const id = req.params.id;
@@ -192,6 +126,7 @@ app.post('/update/:id', function(req, res){
         function(err){
             res.send(err);
         }
+        
     ) 
 
    
