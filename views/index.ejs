@@ -10,7 +10,7 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 </head>
 <body>
 <div class="todo-container">
-<h2>To-Do App</h2>
+<h2>StickyPlan</h2>
 <div class="todo">
 <form action="/" method="POST" class="todo-header">
 <input type="text" name="content">
@@ -21,7 +21,7 @@ integrity="sha384-oS3vJWv+0UjzBfQzYUhtDYW+Pj2yciDJxpsK1OYPAYjqT085Qq/1cq5FLXAZQ7
 
 
 <ul class="todo-list">
-<p>Remaining Tasks : <%= complete%></p>
+<p>Remaining Tasks : <%= incomplete%></p>
 
 
         <% tasks.forEach(function(task) { %>

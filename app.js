@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const nano = require('nano')('http://emily:emily12345@localhost:5984');
+const nano = require('nano')('http://localhost:5984');
 
 
 const todolist = nano.db.use('todolist');
@@ -16,10 +16,10 @@ app.use(express.json());
 
 
 
-    const getCompleteTasks = async () => {
+    const getinCompleteTasks = async () => {
         try {
           const completeTasks = await todolist.view(
-            "complete_tasks",
+            "incomplete_tasks",
             "all"
           );
           const productType = completeTasks.rows[0].value;
@@ -34,9 +34,9 @@ app.use(express.json());
 app.get("/", async function (req, res) {
     try {
       const body = await todolist.view("all_tasks", "all");
-      const complete = await getCompleteTasks();
+      const incomplete = await getinCompleteTasks();
       const tasks = body.rows;
-      res.render("index", { tasks, complete });
+      res.render("index", { tasks, incomplete });
     } catch (err) {
       console.log(err);
     }
